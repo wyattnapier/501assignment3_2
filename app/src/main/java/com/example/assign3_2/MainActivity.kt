@@ -50,26 +50,29 @@ fun ProfilePicture(
 ) {
     var showBadge by remember { mutableStateOf(false) }
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Box(
-            modifier = modifier
-                .size(50.dp)
-                .clip(CircleShape)
-                .background(Color.Gray)
-        )
-        {if (showBadge) {
+        Box(modifier = Modifier.size(100.dp)) // parent box unclipped
+        {
             Box(
                 modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .size(18.dp)
+                    .fillMaxSize()
                     .clip(CircleShape)
-                    .background(Color.Red)
+                    .background(Color.Gray)
             )
-        }}
+            if (showBadge) {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .size(30.dp)
+                        .clip(CircleShape)
+                        .background(Color.Red)
+                )
+            }
+        }
         Button(
-            modifier = Modifier,
+            modifier = Modifier.padding(top = 10.dp),
             content = { Text(text = "Toggle Badge") },
             onClick = { showBadge = !showBadge }
         )
@@ -80,6 +83,6 @@ fun ProfilePicture(
 @Composable
 fun ProfilePicturePreview() {
     Assign3_2Theme {
-        ProfilePicture(modifier = Modifier.padding(20.dp))
+        ProfilePicture(modifier = Modifier.padding(10.dp))
     }
 }
